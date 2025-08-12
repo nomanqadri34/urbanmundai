@@ -2,66 +2,22 @@
     "version": 2,
     "builds": [
         {
-            "src": "package.json",
+            "src": "vite.config.cjs",
             "use": "@vercel/static-build",
-            "config": {
-                "distDir": "dist"
-            }
+            "config": {}
         }
     ],
     "routes": [
         {
-            "src": "/whatsapp-chat",
-            "dest": "/index.html"
+            "handle": "filesystem"
         },
         {
-            "src": "/privacy-policy",
-            "dest": "/index.html"
-        },
-        {
-            "src": "/terms-of-service",
-            "dest": "/index.html"
-        },
-        {
-            "src": "/(.*)",
+            "src": "/.*",
             "dest": "/index.html"
         }
     ],
-    "rewrites": [
-        {
-            "source": "/whatsapp-chat",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/privacy-policy",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/terms-of-service",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ],
-    "headers": [
-        {
-            "source": "/(.*)",
-            "headers": [
-                {
-                    "key": "X-Content-Type-Options",
-                    "value": "nosniff"
-                },
-                {
-                    "key": "X-Frame-Options",
-                    "value": "DENY"
-                },
-                {
-                    "key": "X-XSS-Protection",
-                    "value": "1; mode=block"
-                }
-            ]
-        }
-    ]
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "framework": "vite",
+    "installCommand": "npm install"
 }
